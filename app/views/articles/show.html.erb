@@ -11,13 +11,13 @@
 </p>
 
 <p>
-  <strong>Excerpt:</strong>
-  <%= @article.excerpt %>
+  <strong>Body:</strong>
+  <%= sanitize @article.body %>
 </p>
 
 <p>
-  <strong>Published at:</strong>
-  <%= @article.published_at %>
+  <strong>Price:</strong>
+  <%= number_to_currency @article.price %>
 </p>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |

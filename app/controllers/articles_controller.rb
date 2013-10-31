@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   def index
     #@articles = Article.page(params[:page])
     # to tell will_paginate how many items per page we want:
-    @articles = Article.order("created_at DESC").paginate(page:params[:page], per_page:5)
+    @articles = Article.order("created_at DESC").paginate(page:params[:page], per_page: 30)
   end
 
   # GET /articles/1
@@ -71,6 +71,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :location, :excerpt, :published_at)
+      params.require(:article).permit(:title, :location, :body, :price)
     end
 end

@@ -20,14 +20,26 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :excerpt %><br>
-    <%= f.text_field :excerpt %>
+    <%= f.label :body %>
+    <!-- tinymce height and width are set in application.css-->
+    <%= f.text_area :body, :class => "tinymce" %>
   </div>
-  <div class="field">
-    <%= f.label :published_at %><br>
-    <%= f.datetime_select :published_at %>
-  </div>
-  <div class="actions">
+  <!--<div class="field">
+    < f.label :published_at %><br>
+    < f.datetime_select :published_at %>
+  </div>-->
+
+    <div class="field">
+      <%= f.label :price %>
+      &#36;
+      <%= f.text_field :price %>
+    </div>
+
+  <div class="actions field">
     <%= f.submit %>
   </div>
 <% end %>
+
+<br>
+
+<%= tinymce %>

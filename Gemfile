@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 gem 'faker'
 gem 'will_paginate', '~> 3.0'
+gem 'devise'
+gem 'tinymce-rails'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"
