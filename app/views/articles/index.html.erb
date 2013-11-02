@@ -3,7 +3,7 @@
 <div class= "center_index_page">
 <span class="listing_items">Listing Items</span>
 <% if current_user %>
-<%= link_to 'New Item', new_article_path, class: "new_article_link" %>
+<%= link_to 'New Item', new_article_path, class: "new_item_link" %>
 <% else %>
 <span class="sign_in_or_sign_up">
 Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user_session_path %>

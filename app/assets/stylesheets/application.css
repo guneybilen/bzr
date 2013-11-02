@@ -90,9 +90,8 @@ th.created_at{
 }
 
 
-.new_article_link {
+.new_item_link {
     float: right;
-    margin-right: 180px;
 }
 
 .field{
