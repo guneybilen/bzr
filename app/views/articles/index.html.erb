@@ -2,8 +2,13 @@
 
 <div class= "center_index_page">
 <span class="listing_items">Listing Items</span>
-<%= link_to 'New Article', new_article_path, class: "new_article_link" %>
-
+<% if current_user %>
+<%= link_to 'New Item', new_article_path, class: "new_article_link" %>
+<% else %>
+<span class="sign_in_or_sign_up">
+Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user_session_path %>
+</span>
+<% end %>
 <br /> <br />
 <table>
   <thead>
@@ -23,7 +28,11 @@
   <tbody>
     <% @articles.each do |article| %>
       <tr class align="spacer">
-        <td><%= image_tag article.image1.url(:thumb) %></td>
+        <% if article.image1.url.to_s == '/image1s/original/missing.png' %>
+          <td>No Image</td>
+        <% else %>
+          <td><%= image_tag article.image1.url(:thumb) %></td>
+        <% end %>
         <td class="title"><%= article.title %></td>
         <td><%= article.location %></td>
         <% body = article.body.slice!(0..150) %>

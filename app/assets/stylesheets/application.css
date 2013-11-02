@@ -12,6 +12,10 @@
  *= require_tree .
  */
 
+body{
+    background-color: #F0F8FF;
+}
+
 .header{
     position: fixed;
     height: 35px;
@@ -59,7 +63,7 @@ table
     margin-top: 0px;
 }
 tr{
-    border-bottom: solid #87ceeb 10px;
+    border-bottom: solid #BEBEBE 10px;
 }
 
 td{
@@ -80,7 +84,7 @@ th.created_at{
 }
 
 .listing_items {
-    margin-left:200px;
+    margin-left:400px;
     font-size: 32px;
     font-weight: bold;
 }
@@ -97,4 +101,8 @@ th.created_at{
 
 .mce-panel{
     width: 400px !important;
+}
+
+.sign_in_or_sign_up{
+    float: right;
 }

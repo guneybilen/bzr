@@ -5,8 +5,10 @@ Hello, <%= current_user.name.capitalize %>
 <span class="link_in_header">
 &nbsp; <%= link_to "Sign out", destroy_user_session_path, method: "delete" %>
 &nbsp; <%= link_to "Edit Profile", edit_user_registration_path %>
+</span>
 <% else %>
-&nbsp; <%= link_to "Sign in", new_user_session_path %>
+<span class="link_in_header">
+&nbsp; <%= link_to "Sign in/Sign up", new_user_session_path %>
 </span>
 <% end %>
 </span>
