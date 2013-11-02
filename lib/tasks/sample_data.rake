@@ -15,7 +15,7 @@ desc "Fill database with sample data"
     end
 
     100.times do
-      Article.create(body:Lorem.paragraph, excerpt:Lorem.paragraph, location:Address.city, published_at:random_time, title:(Lorem.words(rand(1..3))).join(' '))
+      Article.create(body:Lorem.paragraph, body:Lorem.paragraph, location:Address.city, published_at:random_time, title:(Lorem.words(rand(1..3))).join(' '))
     end
   end
 end
