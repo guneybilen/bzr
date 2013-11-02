@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '1.9.3'
+ruby '2.0.0'
 gem 'rails', '4.0.0'
 gem 'faker'
 gem 'will_paginate', '~> 3.0'
@@ -18,6 +18,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 # Use SCSS for stylesheets
