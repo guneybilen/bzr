@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_params_before_update, only: :update
 
   # GET /articles
   # GET /articles.json
@@ -71,6 +72,16 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :location, :body, :price)
+      params.require(:article).permit(:title, :location, :body, :price, :image1,
+                                      :image2, :image3, :image4, :image5, :delete_asset1, :delete_asset2,
+                                      :delete_asset3, :delete_asset4, :delete_asset5)
+    end
+
+    def set_params_before_update
+      @article.delete_asset1 = params[:delete_asset1]
+      @article.delete_asset2 = params[:delete_asset2]
+      @article.delete_asset3 = params[:delete_asset3]
+      @article.delete_asset4 = params[:delete_asset4]
+      @article.delete_asset5 = params[:delete_asset5]
     end
 end

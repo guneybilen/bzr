@@ -8,6 +8,7 @@
 <table>
   <thead>
     <tr class="spacer">
+      <th></th>
       <th>Title</th>
       <th>Location</th>
       <th>Body</th>
@@ -22,7 +23,8 @@
   <tbody>
     <% @articles.each do |article| %>
       <tr class align="spacer">
-        <td><%= article.title %></td>
+        <td><%= image_tag article.image1.url(:thumb) %></td>
+        <td class="title"><%= article.title %></td>
         <td><%= article.location %></td>
         <% body = article.body.slice!(0..150) %>
         <% dotter body %>

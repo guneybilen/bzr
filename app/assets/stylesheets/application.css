@@ -66,6 +66,10 @@ td{
    text-align: left;
 }
 
+td.title{
+    padding-left: 20px;
+}
+
 td.created_at{
   text-align: center;
 }

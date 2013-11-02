@@ -12,13 +12,49 @@
 
 <p>
   <strong>Body:</strong>
-  <%= sanitize @article.body %>
+  <%= sanitize @article.body.strip %>
 </p>
 
 <p>
   <strong>Price:</strong>
   <%= number_to_currency @article.price %>
 </p>
+
+  <% if @article.image1.url.to_s == '/image1s/original/missing.png' %>
+    No reecorded image-1.
+  <% else %>
+    <%= image_tag @article.image1.url(:medium) %>
+  <% end %>
+
+<br>
+  <% if @article.image2.url.to_s == '/image2s/original/missing.png' %>
+    No reecorded image-2. <br>
+  <% else %>
+    <%= image_tag @article.image2.url(:square) %>
+  <% end %>
+
+  <% if @article.image3.url.to_s == '/image3s/original/missing.png' %>
+    No reecorded image-3.
+  <% else %>
+    <%= image_tag @article.image3.url(:square) %>
+  <% end %>
+
+<br>
+
+    <% if @article.image4.url.to_s == '/image4s/original/missing.png' %>
+      No reecorded image-4. <br>
+    <% else %>
+      <%= image_tag @article.image4.url(:square) %>
+    <% end %>
+
+    <% if @article.image5.url.to_s == '/image5s/original/missing.png' %>
+      No reecorded image-5. <br>
+    <% else %>
+      <%= image_tag @article.image5.url(:square) %>
+    <% end %>
+
+
+<br><br>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>

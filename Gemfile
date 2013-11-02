@@ -6,6 +6,8 @@ gem 'faker'
 gem 'will_paginate', '~> 3.0'
 gem 'devise'
 gem 'tinymce-rails'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"
