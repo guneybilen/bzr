@@ -1,0 +1,29 @@
+<html>
+<body>
+<p>
+One of your friends, <%= @sender_name %>,
+thought you might like this.
+</p>
+<p>
+<strong><%= @article.title %></strong>
+  <br />
+  <%= link_to(url_for(
+              controller: 'articles',
+              action: 'show',
+              id: @article.id,
+              host: "www.fromitsowner.com"),
+              url_for(
+              controller: 'articles',
+              action: 'show',
+              id: @article.id,
+              host: "www.fromitsowner.com"))%>
+<p>
+  <%= image_tag @article.image1.url(:medium) %>
+</p>
+  <!-- asagidaki job_url methodu routing error veriyor:
+      'no route matches action=show controller=jobs...' -->
+  <!-- link_to job_url(@job, :host => 'www.isgetir.com'),
+        job_url(@job, :host => 'www.isgetir.com') -->
+</p>
+</body>
+</html>

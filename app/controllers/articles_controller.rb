@@ -1,6 +1,36 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :notify_friend]
   before_action :set_params_before_update, only: :update
+  before_filter :authenticate_user!, :except => [:index, :show, :notify_friend]
+  #before_filter :set_current_user
+  after_filter :mail, :only => :create
+
+  def mail
+    #Notice no observer is being used for article model
+    Notifier.article_added(@article).deliver if (Rails.env.production? || Rails.env.development?)
+  end
+
+  def notify_friend
+    #@job = Job.find(params[:id])
+
+    @time_too_fast = ''
+    time_later    # defined in application controller
+    hidden_field  # defined in application controller
+
+    if (params[:name].blank? || params[:email].blank?)
+      flash[:alert] = "Missing Information"
+      render 'show' and return
+    end
+
+    if (@hidden.blank? && @time_too_fast.blank?)
+      Notifier.email_friend(@article, params[:name], params[:email]).deliver
+      flash[:alert] = "Successfully notified friend"
+      redirect_to @article
+    else
+      #params[:notice] = "Missing $$$$$$$$$$$$$$$$$$$$$ #{@hidden} #{@time_too_fast} $$$$$$$$$$$$ Information"
+      render 'show'
+    end
+  end
 
   # GET /articles
   # GET /articles.json
@@ -13,6 +43,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    session[:time_now] = Time.now
   end
 
   # GET /articles/new
@@ -28,11 +59,15 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @article.user = current_user # current_user is set equal to so that in the
+                                 # notifier.rb article_added method can use @article.user
 
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render action: 'show', status: :created, location: @article }
+        #puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ #{@article.inspect}                             #{@article.user}"
+        #puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% #{current_user}"
       else
         format.html { render action: 'new' }
         format.json { render json: @article.errors, status: :unprocessable_entity }

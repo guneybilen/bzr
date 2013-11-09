@@ -20,6 +20,13 @@
   <%= number_to_currency @article.price %>
 </p>
 
+<%= link_to "Email This Item to a Friend", '#',
+        :id => "show_link_to_email_friend" %>
+<br /> <br />
+
+<%= render 'articles/notify_friend' %>
+<br />
+
   <% if @article.image1.url.to_s == '/image1s/original/missing.png' %>
     No reecorded image-1.
   <% else %>

@@ -1,0 +1,27 @@
+<html>
+<body>
+<p>
+Article added with this title: <i><%= @article.title %></i>.
+<br /><br />
+Here is the article body: "<%= @article.body %>"
+<br /><br />
+With the user email: <%= @article.user.email %>
+<br /><br />
+To read the posted article
+  <%= link_to(url_for(
+                controller: 'articles',
+                action: 'show',
+                id: @article.id,
+                host: "www.fromitsowner.com"),
+                url_for(
+                controller: 'articles',
+                action: 'show',
+                id: @article.id,
+                host: "www.fromitsowner.com"))%>
+
+    <!-- asagidaki job_url methodu routing error veriyor:
+        'no route matches action=show controller=jobs...' -->
+    <!-- link_to @job.title, job_url(@job, :host => 'www.isgetir.com') -->
+</p>
+</body>
+</html>

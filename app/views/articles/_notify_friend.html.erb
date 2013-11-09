@@ -1,0 +1,17 @@
+<%= form_tag(notify_friend_article_path(@article), :id => 'notify_friend_form',:style => 'display:none') do %>
+    <div class="field_notify_friend">
+      <%= label_tag :name, "Name" %>:<br />
+      <%= text_field_tag :name, '', :class => "notify_friend_name" %>
+    </div>
+    <div class="field_notify_friend">
+      <%= label_tag :email, "Email Address" %>:<br />
+      <%= text_field_tag :email, '', :class => "notify_friend_email" %>
+    </div>
+    <br />
+    <%= hidden_field_tag(:hidden, '', :class => "hidden_field_tag") %>
+    <div class="action_notify_friend">
+      <%= submit_tag "Send", :class => "notify_friend_submit" %> &nbsp; OR &nbsp;
+      <%= link_to "Cancel", '#', :onclick => "$('#notify_friend_form').slideUp()" %>
+    </div>
+<% end %>
+

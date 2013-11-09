@@ -9,6 +9,7 @@ gem 'devise'
 gem 'tinymce-rails'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'rails-observers'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"

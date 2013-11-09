@@ -1,6 +1,11 @@
 Bzr::Application.routes.draw do
   devise_for :users
-  resources :articles
+
+  resources :articles do
+    member do
+      post :notify_friend
+    end
+  end
 
   root 'articles#index'
 

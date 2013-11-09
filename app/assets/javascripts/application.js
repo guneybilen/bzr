@@ -24,3 +24,9 @@ tinyMCE.init({
     height: "200px"
 
 });*/
+
+
+$(document).delegate("#show_link_to_email_friend", 'click', function(e) {
+    e.preventDefault();
+    $('#notify_friend_form').slideDown();
+   });

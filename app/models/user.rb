@@ -5,5 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  has_many :articles, dependent: :destroy
+  has_many :articles, -> { order('created_at_at DESC, title ASC') }, dependent: :destroy
+
+  #def self.current
+  #  Thread.current[:user]
+  #end
+  #
+  #def self.current=(user)
+  #  Thread.current[:user] = user
+  #end
 end

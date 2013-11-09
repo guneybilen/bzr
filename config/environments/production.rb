@@ -86,4 +86,20 @@ Bzr::Application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
+
+
+  config.action_mailer.default_url_options = { :host => "www.fromitsowner.com" }
+
+   # Email configuration
+   config.action_mailer.raise_delivery_errors = true
+   # Gmail SMTP server setup
+   ActionMailer::Base.smtp_settings = {
+       :address => "smtp.gmail.com",
+       :enable_starttls_auto => true,
+       :port => 587,
+       :authentication => :plain,
+       :user_name => ENV['GOOGLE_USER'],
+       :password => ENV['GOOGLE_PASS']
+   }
+
 end
