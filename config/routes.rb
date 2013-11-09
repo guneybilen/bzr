@@ -4,6 +4,7 @@ Bzr::Application.routes.draw do
   resources :articles do
     member do
       post :notify_friend
+      post :email_owner
     end
   end
 

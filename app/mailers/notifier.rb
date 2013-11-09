@@ -43,5 +43,16 @@ class Notifier < ActionMailer::Base
          :from =>  "admin@isgetir.com"
   end
 
+  def email_owner(article, emailer_name, emailer_email, message)
+    @article = article
+    @emailer_name = emailer_name
+    @emailer_email = emailer_email
+    @message = message
+
+    mail :to => article.user.email,
+             :subject => "#{emailer_name} " + " wants to contact you",
+             :from =>  emailer_email
+
+  end
 end
 

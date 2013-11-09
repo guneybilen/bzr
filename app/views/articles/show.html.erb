@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
@@ -19,6 +17,16 @@
   <strong>Price:</strong>
   <%= number_to_currency @article.price %>
 </p>
+
+<% if current_user && @article.user != current_user %>
+  <%= link_to "Email To the Owner", '#',
+            :id => "show_link_to_email_owner" %>
+  <%= render 'articles/email_owner' %>
+<% else %>
+     Sign in or Sign Up to email owner.<%= link_to " Sign in/Sign up", new_user_session_path %>
+<% end %>
+
+<br><br>
 
 <%= link_to "Email This Item to a Friend", '#',
         :id => "show_link_to_email_friend" %>

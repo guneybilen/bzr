@@ -25,8 +25,16 @@ tinyMCE.init({
 
 });*/
 
+$(document).ready(function() {
 
 $(document).delegate("#show_link_to_email_friend", 'click', function(e) {
     e.preventDefault();
     $('#notify_friend_form').slideDown();
    });
+
+$(document).delegate("#show_link_to_email_owner", 'click', function(e) {
+    e.preventDefault();
+    $('#email_owner_form').slideDown();
+   });
+
+});

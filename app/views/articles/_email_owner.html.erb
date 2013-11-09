@@ -1,0 +1,22 @@
+<%= form_tag(email_owner_article_path(@article), :id => 'email_owner_form',:style => 'display:none') do %>
+    <div class="field_email_owner">
+      <%= label_tag :name, "Name" %>:<br />
+      <%= text_field_tag :name, '', :class => "email_owner_name" %>
+    </div>
+    <div class="field_email_owner">
+      <%= label_tag :email, "Email Address" %>:<br />
+      <%= text_field_tag :email, '', :class => "email_owner_email" %>
+    </div>
+    <br />
+    <div class="field_email_owner">
+      <%= label_tag :message, "Message" %>:<br />
+      <%= text_area_tag :message, '', :class => "email_owner_message" %>
+    </div>
+    <br />
+    <%= hidden_field_tag(:hidden, '', :class => "hidden_field_tag") %>
+    <div class="action_email_owner">
+      <%= submit_tag "Send", :class => "email_owner_submit" %> &nbsp; OR &nbsp;
+      <%= link_to "Cancel", '#', :onclick => "$('#email_owner_form').slideUp()" %>
+    </div>
+<% end %>
+

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :notify_friend]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :notify_friend, :email_owner]
   before_action :set_params_before_update, only: :update
   before_filter :authenticate_user!, :except => [:index, :show, :notify_friend]
   #before_filter :set_current_user
@@ -32,12 +32,35 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def email_owner
+      #@job = Job.find(params[:id])
+
+      @time_too_fast = ''
+      time_later    # defined in application controller
+      hidden_field  # defined in application controller
+
+      if (params[:name].blank? || params[:email].blank?)
+        flash[:alert] = "Missing Information"
+        render 'show' and return
+      end
+
+      if (@hidden.blank? && @time_too_fast.blank?)
+        Notifier.email_owner(@article, params[:name], params[:email], params[:message]).deliver
+        flash[:alert] = "Successfully emailed owner"
+        redirect_to @article
+      else
+        #params[:notice] = "Missing $$$$$$$$$$$$$$$$$$$$$ #{@hidden} #{@time_too_fast} $$$$$$$$$$$$ Information"
+        render 'show'
+      end
+    end
+
   # GET /articles
   # GET /articles.json
   def index
     #@articles = Article.page(params[:page])
     # to tell will_paginate how many items per page we want:
     @articles = Article.order("created_at DESC").paginate(page:params[:page], per_page: 30)
+    session[:back_to] = nil  # :back_to defined in application_controller check_if_article method
   end
 
   # GET /articles/1
