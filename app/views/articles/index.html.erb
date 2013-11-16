@@ -15,7 +15,7 @@ Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user
     <tr class="spacer">
       <th></th>
       <th>Title</th>
-      <th>Location</th>
+      <th>City</th>
       <th>Body</th>
       <th>Price</th>
       <th class="created_at">Created at</th>
@@ -34,7 +34,7 @@ Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user
           <td><%= image_tag article.image1.url(:thumb) %></td>
         <% end %>
         <td class="title"><%= article.title %></td>
-        <td><%= article.location %></td>
+        <td><%= article.city %></td>
         <% body = article.body.slice!(0..150) %>
         <% dotter body %>
         <!-- below sanitize allows no tags and no attributes through in the index page. -->

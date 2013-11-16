@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102200028) do
+ActiveRecord::Schema.define(version: 20131110200016) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20131102200028) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "body",                limit: 255
-    t.string   "location"
+    t.string   "city"
     t.decimal  "price"
     t.integer  "user_id"
     t.string   "image1_file_name"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20131102200028) do
     t.string   "image5_content_type"
     t.integer  "image5_file_size"
     t.datetime "image5_updated_at"
+    t.string   "country"
+    t.string   "phone"
+    t.string   "cell"
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
