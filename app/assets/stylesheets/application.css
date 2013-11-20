@@ -24,7 +24,13 @@ body{
     margin-left: 100px;
 }
 
-.header{
+#search_articles_form_text_field{
+    width: 300px;
+    height: 40px;
+}
+
+
+/*.header{
     position: fixed;
     height: 35px;
     top: 0;
@@ -32,7 +38,7 @@ body{
     z-index: 100;
     background-color: black;
     color: white;
-}
+}*/
 
 .body_yield{
     margin-top: 100px;
@@ -58,6 +64,16 @@ body{
 
 */
 
+
+#search_articles_form{
+    float: left;
+    margin-left: 250px;
+    margin-top: 5px;
+}
+
+#search_articles_form_submit_button{
+    margin-left: 5px;
+}
 
 .center_index_page{
     margin-left: auto;

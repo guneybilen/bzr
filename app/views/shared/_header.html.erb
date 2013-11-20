@@ -6,11 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "FromItsOwner", root_path, :class=>"navbar-brand" %>
+      <%= link_to "FromItsOwner", '#', :class=>"navbar-brand", :id => "brand" %>
     </div>
     <div class="navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "Home", '#', :id => "home" %></li>
         <li><%= link_to "About", about_path %></li>
         <li><%= link_to "Help", help_path %></li>
         <% if current_user %>
@@ -26,7 +26,27 @@
         <% else %>
           <li><%= link_to "Sign in/Sign up", new_user_session_path %></li>
         <% end %>
+
       </ul>
-      </div>
-   </div>
+
+      <% if ((!@about.nil?) || (!@help.nil?)) %>
+
+
+            <%= form_tag  search_articles_path, class: "form-search",
+                             id: "search_articles_form" do %>
+
+            <%= text_field_tag :search_text, '',
+                            { placeholder: "Search Items...",
+                              class: "input-medium search-query",
+                              id: "search_articles_form_text_field" } %>
+
+            <button type="submit" name="" class="btn btn-primary"
+                  id="search_articles_form_submit_button">
+              <i class="icon-search icon-white"></i> Search
+            </button>
+
+            <% end %>
+          <% end %>
+        </div>
+     </div>
  </div>

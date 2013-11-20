@@ -26,6 +26,7 @@ Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user
   </thead>
 
   <tbody>
+  <% unless @articles.nil? %>
     <% @articles.each do |article| %>
       <tr class align="spacer">
         <% if article.image1.url.to_s == '/image1s/original/missing.png' %>
@@ -48,13 +49,15 @@ Sign in or Sign Up to create a new item.<%= link_to " Sign in/Sign up", new_user
         <% end %>
       </tr>
     <% end %>
+    <% end %>
   </tbody>
 </table>
 
 <br>
 
 <br/><br/><br/>
-<%= will_paginate @articles, class: "digg_pagination"  %>
-
+  <% unless @articles.nil? %>
+    <%= will_paginate @articles, class: "digg_pagination"  %>
+  <% end %>
 
 </div>

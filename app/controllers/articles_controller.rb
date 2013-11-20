@@ -1,16 +1,55 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :notify_friend, :email_owner]
+  before_action :set_article, :only=> [:edit, :update, :destroy, :notify_friend, :email_owner]
   before_action :set_params_before_update, only: :update
-  before_filter :authenticate_user!, :except => [:index, :show, :notify_friend, :about, :help]
+  before_filter :authenticate_user!, :except => [:index, :show, :notify_friend, :about, :help, :search, :search_autocomplete]
   #before_filter :set_current_user
   after_filter :mail, :only => :create
+  before_action :search_param, :only => :search
+  before_filter :set_about_and_help, :except => [:about, :help]
+
+   def set_about_and_help
+     @about = :about
+     @help = :help
+   end
+
+
+  def search_autocomplete
+       keyword = params[:q]
+       h = Array.new
+       if (keyword.length > 1)
+         #puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% " + keyword
+         @articles = Article.search(keyword)
+         @articles.each do |article|
+           @articles = h << ({:id => article.body, #this value goes into search_text parameter that is needed in search method in this class
+                           :article => article.body.truncate(40, :separator => ' '),
+                           :price => article.price})
+         end
+         @articles = @articles.sort_by { |k| k[:price] }
+
+         respond_to do |format|
+           format.js
+           format.json { render json: @articles }  #autocomplete icin format.json { render json: @jobs} gerekiyor
+         end
+       end
+  end
+
+  def search
+     if signed_in?
+       @article = current_user.articles.build(params[:article])
+     end
+       sanitized_text = ActionController::Base.helpers.sanitize(search_param[:search_text], :tags=>[])
+       @articles = Article.search(search_param[:search_text])
+       #puts "########################################## " + sanitized_text
+       @articles = @articles.paginate(page: params[:page])
+       render 'articles/index'
+  end
 
   def about
-
+    @about = nil
   end
 
   def help
-
+    @help = nil
   end
 
   def mail
@@ -19,7 +58,6 @@ class ArticlesController < ApplicationController
   end
 
   def notify_friend
-    #@job = Job.find(params[:id])
 
     @time_too_fast = ''
     time_later    # defined in application controller
@@ -41,7 +79,6 @@ class ArticlesController < ApplicationController
   end
 
   def email_owner
-      #@job = Job.find(params[:id])
 
       @time_too_fast = ''
       time_later    # defined in application controller
@@ -65,7 +102,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    #@articles = Article.page(params[:page])
+
     # to tell will_paginate how many items per page we want:
     @articles = Article.order("created_at DESC").paginate(page:params[:page], per_page: 30)
     session[:back_to] = nil  # :back_to defined in application_controller check_if_article method
@@ -74,8 +111,14 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    session[:time_now] = Time.now
+    if params[:id] == "search_autocomplete"
+      search_autocomplete
+    else
+      @article = Article.find(params[:id])
+      session[:time_now] = Time.now
+    end
   end
+
 
   # GET /articles/new
   def new
@@ -84,6 +127,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+
   end
 
   # POST /articles
@@ -109,6 +153,7 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
@@ -123,6 +168,7 @@ class ArticlesController < ApplicationController
   # DELETE /articles/1
   # DELETE /articles/1.json
   def destroy
+
     @article.destroy
     respond_to do |format|
       format.html { redirect_to articles_url }
@@ -141,6 +187,10 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:title, :location, :body, :price, :image1,
                                       :image2, :image3, :image4, :image5, :delete_asset1, :delete_asset2,
                                       :delete_asset3, :delete_asset4, :delete_asset5)
+    end
+
+    def search_param
+      params.permit(:utf8, :authenticity_token, :search_text)
     end
 
     def set_params_before_update

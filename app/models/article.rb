@@ -5,6 +5,8 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
 
+  simple_search :body
+
   before_save :clean_data, :remove_nbsp
 
   has_attached_file :image1, :styles => {

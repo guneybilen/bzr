@@ -13,6 +13,12 @@ Bzr::Application.routes.draw do
   get '/about' => "articles#about"
   get '/help' => "articles#help"
 
+  get 'articles/:id' => "articles#show"
+
+  post '/articles/search_articles' => 'articles#search', :as => "search_articles"
+
+  get '/articles/search_autocomplete' => 'articles#search_autocomplete'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
