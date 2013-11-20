@@ -1,9 +1,17 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :notify_friend, :email_owner]
   before_action :set_params_before_update, only: :update
-  before_filter :authenticate_user!, :except => [:index, :show, :notify_friend]
+  before_filter :authenticate_user!, :except => [:index, :show, :notify_friend, :about, :help]
   #before_filter :set_current_user
   after_filter :mail, :only => :create
+
+  def about
+
+  end
+
+  def help
+
+  end
 
   def mail
     #Notice no observer is being used for article model

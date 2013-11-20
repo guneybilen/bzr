@@ -16,6 +16,14 @@ body{
     background-color: #F0F8FF;
 }
 
+.devise-form{
+    margin-left: 110px;
+}
+
+.show-page{
+    margin-left: 100px;
+}
+
 .header{
     position: fixed;
     height: 35px;
@@ -25,14 +33,12 @@ body{
     background-color: black;
     color: white;
 }
-.container{
-    margin-top: 50px;
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
-    /*width: 800px;*/
+
+.body_yield{
+    margin-top: 100px;
 }
 
-.link_in_header a:link{
+/*.link_in_header a:link{
     color: #ffffff;
     text-decoration: none;
 }
@@ -50,6 +56,9 @@ body{
     padding-right: 50px;
 }
 
+*/
+
+
 .center_index_page{
     margin-left: auto;
     margin-right: auto;
@@ -57,14 +66,6 @@ body{
 }
 
 
-table
-{
-    border-collapse: collapse;
-    margin-top: 0px;
-}
-tr{
-    border-bottom: solid #BEBEBE 10px;
-}
 
 td{
    text-align: left;
