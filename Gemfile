@@ -10,6 +10,8 @@ gem 'tinymce-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'rails-observers'
+gem "awesome_print"
+
 
 group :test, :development do
   gem "rspec-rails", "~> 2.4"
